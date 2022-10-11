@@ -47,5 +47,24 @@ namespace BookManagerApi.Controllers
             _bookManagementService.Create(book);
             return CreatedAtAction(nameof(GetBookById), new { id = book.Id }, book);
         }
+
+        ////Delete method with return message after deletion to the user
+        //// DELETE: api/v1/book/5
+        //[HttpDelete("{id}")]
+        //public ActionResult<string> DeleteBookById(long id)
+        //{
+        //    var bookName = _bookManagementService.DeleteBook(id);
+        //    return "The book '" + bookName + "' is deleted successfully!";
+        //}
+
+
+        //Delete method without any return message to the user
+        // DELETE: api/v1/book/5
+        [HttpDelete("{id}")] 
+        public IActionResult DeleteBookByIdWithNoReturnMsg(long id)
+        {
+            _bookManagementService.Delete(id);
+            return NoContent();
+        }
     }
 }

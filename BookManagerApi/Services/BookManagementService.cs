@@ -23,6 +23,7 @@ namespace BookManagerApi.Services
             _context.Add(book);
             _context.SaveChanges();
             return book;
+          
         }
 
         public Book Update(long id, Book book)
@@ -36,6 +37,25 @@ namespace BookManagerApi.Services
 
             _context.SaveChanges();
             return book;
+        }
+
+        //Tried to return a message with book name as a string
+        public string DeleteBook(long id)
+        {
+            var existingBookFound = FindBookById(id);
+            var bookTitle = existingBookFound.Title;
+            _context.Books.Remove(existingBookFound);
+            _context.SaveChanges();
+            return bookTitle;
+        }
+
+        //Delete method without any return message to the user
+        public bool Delete(long id)
+        {
+            var existingBookFound = FindBookById(id);
+            _context.Books.Remove(existingBookFound);
+            _context.SaveChanges();
+            return true;
         }
 
         public Book FindBookById(long id)
